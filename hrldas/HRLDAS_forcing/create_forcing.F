@@ -1898,7 +1898,9 @@ contains
                 datastruct%data = datastruct%data * (1.0 / float(p2_seconds - p1_seconds))
              endwhere
              newmax = maxval(datastruct%data, mask=(datastruct%data > -1.E25))
-             write(*,'(" to ", F12.6, ":    factor of ", I8)') newmax, NINT(oldmax/newmax)
+             if (newmax > 0.0) then
+                write(*,'(" to ", F12.6, ":    factor of ", I8)') newmax, NINT(oldmax/newmax)
+             endif
              ! Change the units to mm/s, reflecting the rescaling we just did.
              datastruct%units = "mm/s"
           else 
